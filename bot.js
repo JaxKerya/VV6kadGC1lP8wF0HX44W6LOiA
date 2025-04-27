@@ -127,7 +127,6 @@ const rest = new REST({ version: '10' }).setToken(TOKEN);
             { body: commands }
         );
         console.log('Slash komutlar başarıyla yüklendi.');
-        console.log('Guncel');
     } catch (error) {
         console.error(error);
     }
