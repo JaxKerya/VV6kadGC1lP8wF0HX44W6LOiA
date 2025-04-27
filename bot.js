@@ -2,6 +2,33 @@ const { Client, GatewayIntentBits, SlashCommandBuilder, Routes, REST, EmbedBuild
 const fs = require('fs');
 const path = require('path');
 
+// Sezar şifreleme/deşifreleme fonksiyonları
+function sezarSifrele(metin, kaydirma) {
+    let sonuc = '';
+    for (let i = 0; i < metin.length; i++) {
+        let karakter = metin[i];
+        
+        // Büyük harf ise
+        if (karakter.match(/[A-Z]/)) {
+            sonuc += String.fromCharCode((karakter.charCodeAt(0) - 65 + kaydirma) % 26 + 65);
+        }
+        // Küçük harf ise
+        else if (karakter.match(/[a-z]/)) {
+            sonuc += String.fromCharCode((karakter.charCodeAt(0) - 97 + kaydirma) % 26 + 97);
+        }
+        // Sayı veya özel karakter ise olduğu gibi bırak
+        else {
+            sonuc += karakter;
+        }
+    }
+    return sonuc;
+}
+
+function sezarDesifrele(sifreliMetin, kaydirma) {
+    // Negatif kaydırma kullanarak deşifrele
+    return sezarSifrele(sifreliMetin, 26 - (kaydirma % 26));
+}
+
 const client = new Client({
     intents: [
         GatewayIntentBits.Guilds,
@@ -9,10 +36,12 @@ const client = new Client({
     ],
 });
 
-// Bot token ve client id bilgileri
-const TOKEN = 'MTM2NTk4NjU3MTkyODczMTY2OQ.G75PBJ.NaDh9kEZjPhee8plF9v14eaGUFV_xVKzl7nLGU';
+// Bot token ve client id bilgileri - şifrelenmiş
+const SIFRELI_TOKEN = 'NUN2OUl4OkV3NUlzPEdaNUZ2PR.HuYVjz.nQUL4I8mSewPnhXLviSlFiZ-mS_ZwIqQ7SYuml'; // Bu kısım şifrelenecek
+const SIFRELEME_ANAHTARI = 1; // Sezar şifreleme için kullanılacak kaydırma miktarı
+const TOKEN = sezarDesifrele(SIFRELI_TOKEN, SIFRELEME_ANAHTARI);
 const CLIENT_ID = '1365986571928731669';
-const GUILD_ID = '1364220759332880474';
+const GUILD_ID = '1141925372317937775';
 
 // Veritabanı dosya yolu
 const DB_PATH = path.join(__dirname, 'veritabani.json');
@@ -731,3 +760,12 @@ client.on('interactionCreate', async interaction => {
 
 // Botu başlat
 client.login(TOKEN);
+
+// Token şifreleme örneği - bu kısım sadece tokeni şifrelemek için
+// GitHub'a yüklemeden önce kaldırın veya yorum satırı haline getirin
+// Aşağıdaki kod, orijinal tokeninizi şifreli hale getirecek
+console.log('----- TOKEN ŞİFRELEME BİLGİLERİ (GitHub\'a yüklemeden önce bu kısmı silin) -----');
+console.log('Orijinal Token: ' + SIFRELI_TOKEN);
+console.log('Şifreleme Anahtarı: ' + SIFRELEME_ANAHTARI);
+console.log('Şifrelenmiş Token: ' + sezarSifrele(SIFRELI_TOKEN, SIFRELEME_ANAHTARI));
+console.log('---------------------------------------------------------------------------------');
