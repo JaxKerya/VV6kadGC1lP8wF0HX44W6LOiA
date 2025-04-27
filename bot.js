@@ -12,7 +12,7 @@ const client = new Client({
 // Bot token ve client id bilgileri
 const TOKEN = 'MTM2NTk4NjU3MTkyODczMTY2OQ.G75PBJ.NaDh9kEZjPhee8plF9v14eaGUFV_xVKzl7nLGU';
 const CLIENT_ID = '1365986571928731669';
-const GUILD_ID = '1141925372317937775';
+const GUILD_ID = '1364220759332880474';
 
 // Veritabanı dosya yolu
 const DB_PATH = path.join(__dirname, 'veritabani.json');
