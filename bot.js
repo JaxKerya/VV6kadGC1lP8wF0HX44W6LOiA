@@ -41,7 +41,7 @@ const SIFRELI_TOKEN = 'NUN2OUl4OkV3NUlzPEdaNUZ2PR.HuYVjz.nQUL4I8mSewPnhXLviSlFiZ
 const SIFRELEME_ANAHTARI = 1; // Sezar şifreleme için kullanılacak kaydırma miktarı
 const TOKEN = sezarDesifrele(SIFRELI_TOKEN, SIFRELEME_ANAHTARI);
 const CLIENT_ID = '1365986571928731669';
-const GUILD_ID = '1141925372317937775';
+const GUILD_ID = '1364220759332880474';
 
 // Veritabanı dosya yolu
 const DB_PATH = path.join(__dirname, 'veritabani.json');
